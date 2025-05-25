@@ -77,8 +77,6 @@ models/*.onnx
 models/*.torchscript
 runs/
 datasets/
-*.jpg
-*.png
 *.mp4
 *.avi
 logs/
