@@ -4,7 +4,6 @@ An intelligent Rock-Paper-Scissors detection system using YOLOv8 object detectio
 
 ![Python](https://img.shields.io/badge/python-v3.8+-blue.svg)
 ![PyTorch](https://img.shields.io/badge/PyTorch-v1.9+-red.svg)
-![YOLOv8](https://img.shields.io/badge/YOLOv8-latest-green.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 ## 🚀 Features
