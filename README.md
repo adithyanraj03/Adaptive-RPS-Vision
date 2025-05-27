@@ -311,6 +311,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **⭐ If you found this project helpful, please give it a star! ⭐**
 
-[Demo Video](https://youtube.com/watch?v=demo) | [Live Demo](https://demo.example.com) | [Documentation](docs/)
+[Demo Video](https://youtu.be/F85R0rNCFoM) | [Live Demo]() | [Documentation](docs/)
 
 
