@@ -94,7 +94,7 @@ The model demonstrates exceptional real-world applicability:
 
 ```
 # Clone the repository
-git clone https://github.com/yourusername/adaptive-rps-vision.git
+git clone https://github.com/adithyanraj03/Adaptive-RPS-Vision.git
 cd adaptive-rps-vision
 
 # Install dependencies  
@@ -121,7 +121,7 @@ Our pretrained model offers:
 - 🔄 **Regular Updates**: Continuously improved with new data
 
 **📮 Contact for Pretrained Model:**
-- 📧 **Email**: [your.email@example.com](mailto:your.email@example.com)
+- 📧 **Email**: [your.email@example.com](mailto:adithyanraj03@gmail.com)
 - 💬 **Subject**: "AdaptiveRPS-Vision Pretrained Model Request"
 - 📝 **Include**: Your use case, organization (if applicable), and timeline
 
@@ -208,16 +208,15 @@ If you use this model in your research, please cite:
   title={AdaptiveRPS-Vision: Intelligent Rock-Paper-Scissors Detection},
   author={Your Name},
   year={2025},
-  url={https://github.com/yourusername/adaptive-rps-vision}
+  url={https://github.com/adithyanraj03/Adaptive-RPS-Vision}
 }
 ```
 
 ## 📞 Support & Contact
 
-- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/adaptive-rps-vision/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/adaptive-rps-vision/discussions)
-- 📧 **Email**: [your.email@example.com](mailto:your.email@example.com)
-- 🌐 **Website**: [Your Website](https://yourwebsite.com)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/adithyanraj03/Adaptive-RPS-Vision/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/adithyanraj03/Adaptive-RPS-Vision/discussions)
+- 📧 **Email**: [your.email@example.com](mailto:adithyanraj03@gmail.com)
 
 ## 📋 License
 
@@ -229,9 +228,8 @@ This model and associated code are released under the MIT License. See [LICENSE]
 
 **🌟 Star this repository if you found it helpful! 🌟**
 
-![GitHub Stars](https://img.shields.io/github/stars/yourusername/adaptive-rps-vision?style=social)
-![GitHub Forks](https://img.shields.io/github/forks/yourusername/adaptive-rps-vision?style=social)
+![GitHub Stars](https://img.shields.io/github/stars/adithyanraj03/Adaptive-RPS-Vision?style=social)
+![GitHub Forks](https://img.shields.io/github/forks/adithyanraj03/Adaptive-RPS-Vision?style=social)
 
-*Built with ❤️ for the computer vision community*
 
 
