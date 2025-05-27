@@ -3,6 +3,8 @@
 ![PyTorch](https://img.shields.io/badge/PyTorch-v1.9+-red.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
+[Demo Video](https://youtu.be/F85R0rNCFoM) | [Live Demo]() | [Documentation](docs/)
+
 An intelligent Rock-Paper-Scissors detection system using YOLOv8 object detection with reinforcement learning-based adaptive AI opponent.
 
 
@@ -310,7 +312,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 
 **⭐ If you found this project helpful, please give it a star! ⭐**
-
-[Demo Video](https://youtu.be/F85R0rNCFoM) | [Live Demo]() | [Documentation](docs/)
 
 
