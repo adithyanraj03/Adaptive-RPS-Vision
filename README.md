@@ -294,36 +294,10 @@ flake8 src/
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## 🔮 Authors
 
-- **Ultralytics YOLOv8** for the object detection framework
-- **PyTorch** for the deep learning foundation
-- **PyQt5** for the GUI framework
-- **OpenCV** for computer vision utilities
-- **Rock-Paper-Scissors Dataset** contributors
-
-## 📞 Support
-
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/yourusername/adaptive-rps-vision/issues)
-- 💡 **Feature Requests**: [GitHub Discussions](https://github.com/yourusername/adaptive-rps-vision/discussions)
-- 📧 **Email**: your.email@example.com
-
-## 🔮 Roadmap
-
-### Version 2.0 (Planned)
-- [ ] Multi-player support
-- [ ] Online leaderboards
-- [ ] Advanced AI strategies
-- [ ] Mobile app version
-- [ ] Tournament mode
-
-### Version 1.5 (Next Release)
-- [ ] Model ensembling
-- [ ] Real-time training
-- [ ] Custom gesture support
-- [ ] Performance dashboard
-- [ ] Video recording
-
+- [Adithya N Raj](https://github.com/adithyanraj03)<br>
+- [Adhi R Anand](https://github.com/adhiranand26)
 ---
 
 
