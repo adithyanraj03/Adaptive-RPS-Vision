@@ -344,4 +344,154 @@ class DatasetManager:
             for file_stem in file_list:
                 # Copy image
                 for ext in ['.jpg', '.png']:
-                    src_img = images_
+                    src_img = images_dir / f"{file_stem}{ext}"
+                    if src_img.exists():
+                        dst_img = split_images_dir / f"{file_stem}{ext}"
+                        shutil.copy2(src_img, dst_img)
+                        break
+                
+                # Copy label
+                src_label = labels_dir / f"{file_stem}.txt"
+                if src_label.exists():
+                    dst_label = split_labels_dir / f"{file_stem}.txt"
+                    shutil.copy2(src_label, dst_label)
+        
+        self.logger.info("Dataset split completed successfully")
+    
+    def augment_dataset(
+        self,
+        source_split: str = 'train',
+        augmentation_factor: int = 2,
+        output_suffix: str = '_aug'
+    ):
+        """
+        Apply data augmentation to increase dataset size.
+        
+        Args:
+            source_split: Split to augment ('train', 'valid', 'test')
+            augmentation_factor: Number of augmented versions per image
+            output_suffix: Suffix for augmented files
+        """
+        self.logger.info(f"Augmenting {source_split} dataset with factor {augmentation_factor}")
+        
+        images_dir = self.dataset_root / source_split / 'images'
+        labels_dir = self.dataset_root / source_split / 'labels'
+        
+        if not (images_dir.exists() and labels_dir.exists()):
+            raise ValueError(f"Source split directory not found: {source_split}")
+        
+        # Get all image files
+        image_files = list(images_dir.glob('*.jpg')) + list(images_dir.glob('*.png'))
+        
+        for img_file in image_files:
+            label_file = labels_dir / f"{img_file.stem}.txt"
+            if not label_file.exists():
+                continue
+            
+            # Load image
+            image = cv2.imread(str(img_file))
+            if image is None:
+                continue
+            
+            # Load labels
+            with open(label_file, 'r') as f:
+                labels = [line.strip() for line in f.readlines() if line.strip()]
+            
+            # Generate augmented versions
+            for i in range(augmentation_factor):
+                aug_image, aug_labels = self._apply_augmentation(image, labels)
+                
+                # Save augmented image
+                aug_img_name = f"{img_file.stem}{output_suffix}_{i}{img_file.suffix}"
+                aug_img_path = images_dir / aug_img_name
+                cv2.imwrite(str(aug_img_path), aug_image)
+                
+                # Save augmented labels
+                aug_label_name = f"{img_file.stem}{output_suffix}_{i}.txt"
+                aug_label_path = labels_dir / aug_label_name
+                with open(aug_label_path, 'w') as f:
+                    for label in aug_labels:
+                        f.write(f"{label}\n")
+        
+        self.logger.info(f"Augmentation completed for {source_split} split")
+    
+    def _apply_augmentation(self, image: np.ndarray, labels: List[str]) -> Tuple[np.ndarray, List[str]]:
+        """Apply random augmentation to image and adjust labels accordingly."""
+        aug_image = image.copy()
+        aug_labels = labels.copy()
+        
+        # Random brightness adjustment
+        if random.random() < 0.5:
+            brightness = random.uniform(*self.augmentation_config['brightness_range'])
+            aug_image = cv2.convertScaleAbs(aug_image, alpha=1, beta=brightness * 255)
+        
+        # Random contrast adjustment
+        if random.random() < 0.5:
+            contrast = random.uniform(*self.augmentation_config['contrast_range'])
+            aug_image = cv2.convertScaleAbs(aug_image, alpha=contrast, beta=0)
+        
+        # Random horizontal flip
+        if random.random() < self.augmentation_config['flip_probability']:
+            aug_image = cv2.flip(aug_image, 1)
+            # Adjust bounding box coordinates for flip
+            aug_labels = self._flip_labels_horizontal(aug_labels)
+        
+        # Random noise
+        if random.random() < self.augmentation_config['noise_probability']:
+            noise = np.random.normal(0, 25, aug_image.shape).astype(np.uint8)
+            aug_image = cv2.add(aug_image, noise)
+        
+        return aug_image, aug_labels
+    
+    def _flip_labels_horizontal(self, labels: List[str]) -> List[str]:
+        """Adjust label coordinates for horizontal flip."""
+        flipped_labels = []
+        for label in labels:
+            parts = label.split()
+            if len(parts) == 5:
+                class_id, x_center, y_center, width, height = parts
+                # Flip x_center coordinate
+                new_x_center = 1.0 - float(x_center)
+                flipped_label = f"{class_id} {new_x_center} {y_center} {width} {height}"
+                flipped_labels.append(flipped_label)
+            else:
+                flipped_labels.append(label)
+        return flipped_labels
+    
+    def create_yaml_config(self, output_path: str = "dataset.yaml") -> str:
+        """Create YOLO dataset configuration file."""
+        config = {
+            'path': str(self.dataset_root.absolute()),
+            'train': 'train/images',
+            'val': 'valid/images',
+            'test': 'test/images',
+            'names': {i: name for i, name in enumerate(self.class_names)}
+        }
+        
+        with open(output_path, 'w') as f:
+            yaml.dump(config, f, default_flow_style=False)
+        
+        self.logger.info(f"Dataset YAML config created: {output_path}")
+        return output_path
+    
+    def generate_report(self, output_path: str = "dataset_report.json"):
+        """Generate comprehensive dataset report."""
+        stats = self._calculate_dataset_statistics()
+        validation = self.validate_dataset()
+        
+        report = {
+            'dataset_info': {
+                'root_path': str(self.dataset_root),
+                'class_names': self.class_names,
+                'splits': self.splits
+            },
+            'statistics': stats,
+            'validation': validation,
+            'timestamp': datetime.now().isoformat()
+        }
+        
+        with open(output_path, 'w') as f:
+            json.dump(report, f, indent=2, default=str)
+        
+        self.logger.info(f"Dataset report generated: {output_path}")
+        return report
